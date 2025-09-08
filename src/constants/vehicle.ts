@@ -1,0 +1,1 @@
+export const Vehicle = ['BIKE', 'CAR', 'SCOOTER'];
