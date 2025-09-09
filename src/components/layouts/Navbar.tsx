@@ -16,19 +16,22 @@ import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/a
 import { useAppDispatch } from "@/redux/hook"
 import { Link } from "react-router"
 import ModeToggler from "./ModeToggler"
+import { Role } from "@/constants/role"
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "/", label: "Home", active: true },
-  { href: "#", label: "Features" },
-  { href: "about", label: "About" },
+  { href: "/", label: "Home",role:"PUBLIC"},
+  { href: "about", label: "About",role:"PUBLIC" },
+  { href: "/admin", label: "Dashboard",role:Role.ADMIN },
+  { href: "/rider", label: "Dashboard",role:Role.RIDER },
+  { href: "/driver", label: "Dashboard",role:Role.DRIVER },
 ]
 
 export default function Navbar() {
     const { data } = useUserInfoQuery(undefined);
   const [logout] = useLogoutMutation();
   const dispatch = useAppDispatch();
-console.log(data?.data?.user?.email)
+
   const handleLogout = async () => {
     await logout(undefined);
     dispatch(authApi.util.resetApiState());
@@ -99,14 +102,28 @@ console.log(data?.data?.user?.email)
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">
                 {navigationLinks.map((link, index) => (
-                  <NavigationMenuItem key={index}>
-                    <NavigationMenuLink
-                      asChild
-                      className="text-muted-foreground hover:text-primary py-1.5 font-medium"
-                    >
-                      <Link to={link.href}>{link.label} </Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
+                  <>
+                    {link.role === "PUBLIC" && (
+                      <NavigationMenuItem key={index}>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={link.href}>{link.label}</Link>
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    )}
+                    {link.role === data?.data?.user?.role && (
+                      <NavigationMenuItem key={index}>
+                        <NavigationMenuLink
+                          asChild
+                          className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                        >
+                          <Link to={link.href}>{link.label}</Link>
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    )}
+                  </>
                 ))}
               </NavigationMenuList>
             </NavigationMenu>
