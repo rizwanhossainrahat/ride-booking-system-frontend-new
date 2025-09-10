@@ -134,7 +134,6 @@ export default function Navbar() {
           {data?.data?.user?.email && (
             <Button
               onClick={handleLogout}
-              variant="outline"
               className="text-sm"
             >
               Logout

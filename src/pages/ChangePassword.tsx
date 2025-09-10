@@ -1,12 +1,28 @@
 import Password from "@/components/Password";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
-import { useForm } from "react-hook-form";
+import { authApi, useChangepassMutation, useLogoutMutation } from "@/redux/features/auth/auth.api";
+import { useAppDispatch } from "@/redux/hook";
+import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function ChangePassword() {
-    const form = useForm() 
-     const onSubmit=async(data)=>{
-        console.log(data)
+   const [logout] = useLogoutMutation();
+   const [ChangePassword]=useChangepassMutation()
+   const form = useForm() 
+   const dispatch = useAppDispatch();
+     const onSubmit:SubmitHandler<FieldValues>=async(data)=>{
+        try {
+          const res=await ChangePassword(data).unwrap()
+          
+          if(res.success){
+            toast.success("Password change successfully")
+          }
+          await logout(undefined)
+           dispatch(authApi.util.resetApiState())
+        } catch (error) {
+          console.log(error)
+        }
             
         }
   return (
@@ -14,7 +30,7 @@ export default function ChangePassword() {
       <div className="container mx-auto w-[500px] grid gap-6">
      <Form {...form} >
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        {/* email field */}
+        {/* Old password field */}
         <FormField
           control={form.control}
           name="oldPassword"
@@ -28,7 +44,7 @@ export default function ChangePassword() {
             </FormItem>
           )}
         />
-        {/* password field */}
+        {/* New password field */}
         <FormField
           control={form.control}
           name="newPassword"
