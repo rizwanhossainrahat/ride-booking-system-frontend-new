@@ -1,5 +1,6 @@
 import DriverDetails from "@/pages/Admin/DriverDetails";
 import RiderDetails from "@/pages/Admin/RiderDetails";
+import ChangePassword from "@/pages/ChangePassword";
 import type { ISidebarItem } from "@/types";
 
 export const adminSidebarItems:ISidebarItem[]=[
@@ -15,6 +16,11 @@ export const adminSidebarItems:ISidebarItem[]=[
           title: "Driver Details",
           url: "/admin/driver-details",
           component:DriverDetails
+        },
+        {
+          title: "Change Password",
+          url: "/admin/change-password",
+          component:ChangePassword
         },
       ],
     },

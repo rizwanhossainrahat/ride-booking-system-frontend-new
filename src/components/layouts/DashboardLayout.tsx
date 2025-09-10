@@ -27,7 +27,6 @@ export default function DashboardLayout() {
           <Button asChild className="w-[100px]">
             <Link to="/">Go to home</Link>
           </Button>
-
         </div>
       </SidebarInset>
     </SidebarProvider>

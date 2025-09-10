@@ -13,6 +13,7 @@ import { withAuth } from "@/utils/withAuth";
 import type { TRole } from "@/types";
 import { Role } from "@/constants/role";
 import { driverSidebarItems } from "./driverSidebarItems";
+import ChangePassword from "@/pages/ChangePassword";
 
 export const router=createBrowserRouter([
     {

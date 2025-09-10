@@ -1,4 +1,3 @@
-// import Logo from "@/components/navbar-components/logo"
 import Logo from "@/assets/icons/Logo"
 import { Button } from "@/components/ui/button"
 import {
@@ -18,7 +17,7 @@ import { Link } from "react-router"
 import ModeToggler from "./ModeToggler"
 import { Role } from "@/constants/role"
 
-// Navigation links array to be used in both desktop and mobile menus
+
 const navigationLinks = [
   { href: "/", label: "Home",role:"PUBLIC"},
   { href: "about", label: "About",role:"PUBLIC" },

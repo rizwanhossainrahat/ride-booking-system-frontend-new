@@ -24,7 +24,7 @@ export default function LoginForm() {
         navigate("/");
       }
         } catch (error) {
-          console.log(error)
+          toast.error("Something went wrong")
         }
     }
   return (
@@ -35,7 +35,7 @@ export default function LoginForm() {
         {/* email field */}
         <FormField
           control={form.control}
-          name="email"
+          name="email" 
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>

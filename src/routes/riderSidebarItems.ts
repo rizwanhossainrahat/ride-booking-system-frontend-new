@@ -1,3 +1,4 @@
+import ChangePassword from "@/pages/ChangePassword";
 import RideHistory from "@/pages/Rider/RideHistory";
 import type { ISidebarItem } from "@/types";
 
@@ -10,7 +11,11 @@ export const riderSidebarItems:ISidebarItem[]=[
               url: "/rider/ride-history",
               component:RideHistory
         },
-            
+  {
+          title: "Change Password",
+          url: "/rider/change-password",
+          component:ChangePassword
+         },            
           ],
         },
 ]
